@@ -3,6 +3,7 @@
 int main()
 {
 	Pathfinding pathfinding;
+	pathfinding.run();
 
 	return 0;
 }
