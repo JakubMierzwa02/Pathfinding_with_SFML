@@ -8,7 +8,10 @@ project(Pathfinding)
 find_package(SFML 2.4 COMPONENTS audio graphics window system REQUIRED)
 
 add_executable(Pathfinding
-main.cpp)
+main.cpp
+Pathfinding.h
+Pathfinding.cpp
+)
 
 # Link our executable to SFML and its dependencies
 target_link_libraries(Pathfinding sfml-audio sfml-graphics sfml-window sfml-system)
