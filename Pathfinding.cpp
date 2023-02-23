@@ -7,9 +7,30 @@ void Pathfinding::initWindow()
 	this->window->setFramerateLimit(60);
 }
 
+void Pathfinding::loadMaze()
+{
+	std::string s;
+	this->in.open("map.txt");
+
+	for (size_t i = 0; i < this->N; i++)
+	{
+		this->in >> s;
+		for (size_t j = 0; j < this->N; j++)
+		{
+			if (s[j] == '#')
+				this->Maze[i][j] = -1;
+			else
+				this->Maze[i][j] = 0;
+		}
+	}
+
+	this->in.close();
+}
+
 Pathfinding::Pathfinding()
 {
 	this->initWindow();
+	this->loadMaze();
 }
 
 Pathfinding::~Pathfinding()
