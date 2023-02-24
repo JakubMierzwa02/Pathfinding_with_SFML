@@ -15,7 +15,11 @@ void Pathfinding::initWindow()
 void Pathfinding::loadMaze()
 {
 	std::string s;
-	this->in.open("map.txt");
+	this->in.open("Resources/map.txt");
+	if (!this->in.is_open())
+	{
+		std::cerr << "Could not load file \"map.txt\"";
+	}
 
 	for (size_t i = 0; i < this->N; i++)
 	{
