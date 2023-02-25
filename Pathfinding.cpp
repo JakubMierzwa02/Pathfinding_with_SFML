@@ -3,6 +3,10 @@
 // Initializer functions
 void Pathfinding::initVariables()
 {
+	// Logic
+	this->selecting = 1;
+
+	// Components
 	this->block.setSize(sf::Vector2f(this->gridSize, this->gridSize));
 }
 
@@ -77,6 +81,15 @@ void Pathfinding::updateMaze()
 		}
 		pos_y += this->gridSize;
 		pos_x = 0;
+	}
+}
+
+void Pathfinding::updateSelecting()
+{
+	// Selecting logic
+	if (selecting)
+	{
+		; // TODO: Mark clicked block
 	}
 }
 

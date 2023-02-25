@@ -19,6 +19,9 @@ private:
 
 	// Resources
 
+	// Logic
+	bool selecting;
+
 	// Components
 	static const int N = 32;	// Maze size
 	const float gridSize = 32.f;
@@ -45,6 +48,7 @@ public:
 	// Functions
 	void pollEvents();
 
+	void updateSelecting();
 	void updateMaze();
 	void update();
 
