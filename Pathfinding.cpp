@@ -5,6 +5,8 @@ void Pathfinding::initVariables()
 	// Logic
 	this->selecting = 1;
 	this->changes = 1;
+	this->currRow = 0;
+	this->currCol = 0;
 
 	// Components
 	this->block.setSize(sf::Vector2f(this->gridSize, this->gridSize));
@@ -57,7 +59,11 @@ bool Pathfinding::path(int _row, int _col, int x)
 	// Function recursively searches for a possible path
 	this->Maze[_row][_col] = x;
 	if (_row == 0 || _row == this->N - 1 || _col == 0 || _col == this->N - 1)
+	{
+		this->currRow = _row;
+		this->currCol = _col;
 		return true;
+	}
 
 	if (this->Maze[_row - 1][_col] == 0 && this->path(_row - 1, _col, x + 1))
 		return true;
@@ -69,6 +75,24 @@ bool Pathfinding::path(int _row, int _col, int x)
 		return true;
 
 	return false;
+}
+
+void Pathfinding::mark(int _row, int _col)
+{
+	int x = this->Maze[_row][_col];
+	while (x > 1)
+	{
+		x--;
+		if (_row > 0 && this->Maze[_row - 1][_col] == x)
+			_row--;
+		else if (_row < this->N - 1 && this->Maze[_row + 1][_col] == x)
+			_row++;
+		else if (_col > 0 && this->Maze[_row][_col - 1] == x)
+			_col--;
+		else
+			_col++;
+		this->Maze[_row][_col] = -2;
+	}
 }
 
 void Pathfinding::pollEvents()
@@ -102,7 +126,10 @@ void Pathfinding::updateSelecting()
 			this->changes = 1;
 
 			if (path(this->row, this->col, 1))
+			{
 				std::cout << "Path found";
+				this->mark(this->currRow, this->currCol);
+			}
 			else
 				std::cout << "Path not found";
 		}

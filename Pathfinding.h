@@ -33,6 +33,8 @@ private:
 	int col;
 	//int& row1;
 	//int& col1;
+	int currRow;
+	int currCol;
 
 	// Components
 	static const int N = 32;	// Maze size
@@ -58,6 +60,7 @@ public:
 	virtual ~Pathfinding();
 
 	bool path(int, int, int);
+	void mark(int, int);
 
 	// Functions
 	void pollEvents();
