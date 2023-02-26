@@ -68,6 +68,21 @@ void Pathfinding::updateMousePositions()
 	this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
 }
 
+void Pathfinding::updateSelecting()
+{
+	// Selecting logic
+	for (int i = 0; i < this->blocks.size() && selecting; i++)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->blocks[i].getGlobalBounds().contains(this->mousePosView))
+		{
+			/*this->blocks[i].setFillColor(sf::Color::Red);
+			this->selecting = 0;*/
+			this->Maze[i / 32][i % 32] = -2;
+			this->selecting = 0;
+		}
+	}
+}
+
 void Pathfinding::updateMaze()
 {
 	float pos_x = 0;
@@ -79,6 +94,8 @@ void Pathfinding::updateMaze()
 		{
 			if (this->Maze[i][j] == -1)
 				this->block.setFillColor(sf::Color::Black);
+			else if (this->Maze[i][j] == -2)
+				this->block.setFillColor(sf::Color::Red);
 			else
 				this->block.setFillColor(sf::Color::White);
 
@@ -88,15 +105,6 @@ void Pathfinding::updateMaze()
 		}
 		pos_y += this->gridSize;
 		pos_x = 0;
-	}
-}
-
-void Pathfinding::updateSelecting()
-{
-	// Selecting logic
-	if (selecting)
-	{
-		; // TODO: Mark clicked block
 	}
 }
 
