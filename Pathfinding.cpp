@@ -1,6 +1,5 @@
 #include "Pathfinding.h"
 
-// Initializer functions
 void Pathfinding::initVariables()
 {
 	// Logic
@@ -74,7 +73,8 @@ void Pathfinding::updateSelecting()
 	// Selecting logic
 	for (int i = 0; i < this->blocks.size() && selecting; i++)
 	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->blocks[i].getGlobalBounds().contains(this->mousePosView))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->blocks[i].getGlobalBounds().contains(this->mousePosView)
+			&& this->Maze[i/ 32][i % 32] == 0)
 		{
 			this->Maze[i / 32][i % 32] = -2;
 			this->selecting = 0;
