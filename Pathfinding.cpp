@@ -61,6 +61,13 @@ void Pathfinding::pollEvents()
 	}
 }
 
+void Pathfinding::updateMousePositions()
+{
+	this->mousePosScreen = sf::Mouse::getPosition();
+	this->mousePosWindow = sf::Mouse::getPosition(*this->window);
+	this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
+}
+
 void Pathfinding::updateMaze()
 {
 	float pos_x = 0;
@@ -96,6 +103,8 @@ void Pathfinding::updateSelecting()
 void Pathfinding::update()
 {
 	this->pollEvents();
+	this->updateMousePositions();
+	this->updateSelecting();
 	this->updateMaze();
 }
 

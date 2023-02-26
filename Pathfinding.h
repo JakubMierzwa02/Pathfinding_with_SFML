@@ -17,6 +17,11 @@ private:
 	// Events
 	sf::Event event;
 
+	// Mouse positions
+	sf::Vector2i mousePosScreen;
+	sf::Vector2i mousePosWindow;
+	sf::Vector2f mousePosView;
+
 	// Resources
 
 	// Logic
@@ -48,6 +53,7 @@ public:
 	// Functions
 	void pollEvents();
 
+	void updateMousePositions();
 	void updateSelecting();
 	void updateMaze();
 	void update();
