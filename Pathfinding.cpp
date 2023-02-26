@@ -5,6 +5,7 @@ void Pathfinding::initVariables()
 {
 	// Logic
 	this->selecting = 1;
+	this->changes = 1;
 
 	// Components
 	this->block.setSize(sf::Vector2f(this->gridSize, this->gridSize));
@@ -75,10 +76,9 @@ void Pathfinding::updateSelecting()
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->blocks[i].getGlobalBounds().contains(this->mousePosView))
 		{
-			/*this->blocks[i].setFillColor(sf::Color::Red);
-			this->selecting = 0;*/
 			this->Maze[i / 32][i % 32] = -2;
 			this->selecting = 0;
+			this->changes = 1;
 		}
 	}
 }
@@ -113,7 +113,12 @@ void Pathfinding::update()
 	this->pollEvents();
 	this->updateMousePositions();
 	this->updateSelecting();
-	this->updateMaze();
+
+	if (this->changes)
+	{
+		this->updateMaze();
+	}
+	this->changes = 0;
 }
 
 void Pathfinding::renderMaze()

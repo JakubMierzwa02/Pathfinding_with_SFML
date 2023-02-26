@@ -26,6 +26,7 @@ private:
 
 	// Logic
 	bool selecting;
+	bool changes;
 
 	// Components
 	static const int N = 32;	// Maze size
