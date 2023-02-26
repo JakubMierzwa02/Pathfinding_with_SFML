@@ -15,6 +15,7 @@ void Pathfinding::initVariables()
 void Pathfinding::initWindow()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(1024, 1024), "Pathfinding");
+	this->window->setPosition(sf::Vector2i(0, 0));
 	this->window->setFramerateLimit(60);
 }
 
@@ -101,6 +102,8 @@ void Pathfinding::pollEvents()
 	{
 		if (this->event.type == sf::Event::Closed)
 			this->window->close();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			this->window->close();
 	}
 }
 
@@ -145,7 +148,9 @@ void Pathfinding::updateMaze()
 	{
 		for (int j = 0; j < this->N; j++)
 		{
-			if (this->Maze[i][j] == -1)
+			if (i == 0 && j == 1)
+				this->block.setFillColor(sf::Color::Green);
+			else if (this->Maze[i][j] == -1)
 				this->block.setFillColor(sf::Color::Black);
 			else if (this->Maze[i][j] == -2)
 				this->block.setFillColor(sf::Color::Red);
@@ -159,6 +164,7 @@ void Pathfinding::updateMaze()
 		pos_y += this->gridSize;
 		pos_x = 0;
 	}
+	//this->blocks[1].setFillColor(sf::Color::Green);
 }
 
 void Pathfinding::update()

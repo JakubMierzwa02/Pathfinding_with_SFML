@@ -31,8 +31,6 @@ private:
 	// Pathfinding algorithm
 	int row;
 	int col;
-	//int& row1;
-	//int& col1;
 	int currRow;
 	int currCol;
 
