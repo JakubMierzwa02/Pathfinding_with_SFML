@@ -52,6 +52,25 @@ Pathfinding::~Pathfinding()
 	delete this->window;
 }
 
+bool Pathfinding::path(int _row, int _col, int x)
+{
+	// Function recursively searches for a possible path
+	this->Maze[_row][_col] = x;
+	if (_row == 0 || _row == this->N - 1 || _col == 0 || _col == this->N - 1)
+		return true;
+
+	if (this->Maze[_row - 1][_col] == 0 && this->path(_row - 1, _col, x + 1))
+		return true;
+	if (this->Maze[_row + 1][_col] == 0 && this->path(_row + 1, _col, x + 1))
+		return true;
+	if (this->Maze[_row][_col - 1] == 0 && this->path(_row, _col - 1, x + 1))
+		return true;
+	if (this->Maze[_row][_col + 1] == 0 && this->path(_row, _col + 1, x + 1))
+		return true;
+
+	return false;
+}
+
 void Pathfinding::pollEvents()
 {
 	while (this->window->pollEvent(this->event))
@@ -74,11 +93,18 @@ void Pathfinding::updateSelecting()
 	for (int i = 0; i < this->blocks.size() && selecting; i++)
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->blocks[i].getGlobalBounds().contains(this->mousePosView)
-			&& this->Maze[i/ 32][i % 32] == 0)
+			&& this->Maze[i / 32][i % 32] == 0)
 		{
-			this->Maze[i / 32][i % 32] = -2;
+			this->row = i / 32;
+			this->col = i % 32;
+			this->Maze[this->row][this->col] = -2;
 			this->selecting = 0;
 			this->changes = 1;
+
+			if (path(this->row, this->col, 1))
+				std::cout << "Path found";
+			else
+				std::cout << "Path not found";
 		}
 	}
 }

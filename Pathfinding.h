@@ -28,6 +28,12 @@ private:
 	bool selecting;
 	bool changes;
 
+	// Pathfinding algorithm
+	int row;
+	int col;
+	//int& row1;
+	//int& col1;
+
 	// Components
 	static const int N = 32;	// Maze size
 	const float gridSize = 32.f;
@@ -50,6 +56,8 @@ public:
 	// Constructors / Destructors
 	Pathfinding();
 	virtual ~Pathfinding();
+
+	bool path(int, int, int);
 
 	// Functions
 	void pollEvents();
