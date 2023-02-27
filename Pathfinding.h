@@ -8,6 +8,17 @@
 #include <vector>
 #include <fstream>
 
+/*
+	==========
+	== READ ==
+	==========
+
+	After starting the program, a maze will appear. 
+	Click on any part of the maze to reveal the path leading to the green exit point.
+
+	==========
+*/
+
 class Pathfinding
 {
 private:
@@ -72,5 +83,4 @@ public:
 	void render();
 
 	void run();
-
 };

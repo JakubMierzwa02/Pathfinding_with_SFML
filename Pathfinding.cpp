@@ -141,6 +141,7 @@ void Pathfinding::updateSelecting()
 
 void Pathfinding::updateMaze()
 {
+	// Placing blocks in positionsand setting colors
 	float pos_x = 0;
 	float pos_y = 0;
 
@@ -164,7 +165,6 @@ void Pathfinding::updateMaze()
 		pos_y += this->gridSize;
 		pos_x = 0;
 	}
-	//this->blocks[1].setFillColor(sf::Color::Green);
 }
 
 void Pathfinding::update()
@@ -182,6 +182,7 @@ void Pathfinding::update()
 
 void Pathfinding::renderMaze()
 {
+	// Draw all blocks
 	for (size_t i = 0; i < this->blocks.size(); i++)
 		this->window->draw(this->blocks[i]);
 }
